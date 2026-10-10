@@ -218,3 +218,16 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Ignore raw data files and video (Requirement from guidelines)
+data/
+video/
+*.csv
+!results.csv
+
+# Python cached files
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.env/
+venv/
