@@ -21,7 +21,12 @@ def extract_window_features(win_r, win_l):
     
     # Dominio Bilateral
     rms_l = np.sqrt(np.mean(win_l**2))
-    asym_ratio = rms_r / (rms_l + 1e-8)
+    
+    # Protección contra división por cero en el Ratio de Asimetría (epsilon robusto)
+    asym_ratio = (rms_r + 1e-6) / (rms_l + 1e-6)
+    
+    # Acotar valores extremos/outliers del ratio de asimetría para estabilizar el modelo
+    asym_ratio = np.clip(asym_ratio, 0.1, 10.0)
     
     return {
         'rms_right': rms_r,
